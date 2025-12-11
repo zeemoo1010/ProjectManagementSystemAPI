@@ -1,0 +1,40 @@
+# Build results
+bin/
+obj/
+
+# Visual Studio folder
+.vs/
+
+# User-specific files
+*.user
+*.suo
+
+# Logs
+*.log
+
+# NuGet Packages
+*.nupkg
+packages/
+
+# Compiled DLLs
+*.dll
+*.exe
+
+# Publish directory
+publish/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Rider / JetBrains
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# ASP.NET generated files
+Generated/
