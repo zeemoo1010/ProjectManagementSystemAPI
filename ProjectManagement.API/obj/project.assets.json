@@ -41,7 +41,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
-          "ProjectManagement.Core": "1.0.0",
+          "ProjectManagement.Domain": "1.0.0",
           "ProjectManagement.Infrastructure": "1.0.0"
         },
         "compile": {
@@ -51,21 +51,21 @@
           "bin/placeholder/ProjectManagement.Application.dll": {}
         }
       },
-      "ProjectManagement.Core/1.0.0": {
+      "ProjectManagement.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "compile": {
-          "bin/placeholder/ProjectManagement.Core.dll": {}
+          "bin/placeholder/ProjectManagement.Domain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/ProjectManagement.Core.dll": {}
+          "bin/placeholder/ProjectManagement.Domain.dll": {}
         }
       },
       "ProjectManagement.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
-          "ProjectManagement.Core": "1.0.0"
+          "ProjectManagement.Domain": "1.0.0"
         },
         "compile": {
           "bin/placeholder/ProjectManagement.Infrastructure.dll": {}
@@ -118,10 +118,10 @@
       "path": "../ProjectManagement.Application/ProjectManagement.Application.csproj",
       "msbuildProject": "../ProjectManagement.Application/ProjectManagement.Application.csproj"
     },
-    "ProjectManagement.Core/1.0.0": {
+    "ProjectManagement.Domain/1.0.0": {
       "type": "project",
-      "path": "../ProjectManagement.Core/ProjectManagement.Core.csproj",
-      "msbuildProject": "../ProjectManagement.Core/ProjectManagement.Core.csproj"
+      "path": "../ProjectManagement.Core/ProjectManagement.Domain.csproj",
+      "msbuildProject": "../ProjectManagement.Core/ProjectManagement.Domain.csproj"
     },
     "ProjectManagement.Infrastructure/1.0.0": {
       "type": "project",
@@ -136,7 +136,8 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ISMAIL\\.nuget\\packages\\": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
@@ -144,16 +145,23 @@
       "projectUniqueName": "C:\\Projects\\API\\ProjectManagementSystemAPI\\ProjectManagement.API\\ProjectManagement.API.csproj",
       "projectName": "ProjectManagement.API",
       "projectPath": "C:\\Projects\\API\\ProjectManagementSystemAPI\\ProjectManagement.API\\ProjectManagement.API.csproj",
-      "packagesPath": "C:\\Users\\ISMAIL\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
       "outputPath": "C:\\Projects\\API\\ProjectManagementSystemAPI\\ProjectManagement.API\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\ISMAIL\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -206,7 +214,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

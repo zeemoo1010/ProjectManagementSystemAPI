@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "e+gLZCskk9Y=",
+  "dgSpecHash": "a96JGM6ZZyo=",
   "success": true,
-  "projectFilePath": "C:\\Projects\\API\\ProjectManagementSystemAPI\\ProjectManagement.Core\\ProjectManagement.Core.csproj",
+  "projectFilePath": "C:\\Projects\\API\\ProjectManagementSystemAPI\\ProjectManagement.Core\\ProjectManagement.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

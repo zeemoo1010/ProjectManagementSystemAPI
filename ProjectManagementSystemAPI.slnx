@@ -1,6 +1,7 @@
 <Solution>
+  <Project Path="Persistence/ProjectManagement.Persistence.csproj" Id="ba68cadc-5ece-42b0-9994-42718881085b" />
   <Project Path="ProjectManagement.API/ProjectManagement.API.csproj" />
   <Project Path="ProjectManagement.Application/ProjectManagement.Application.csproj" />
-  <Project Path="ProjectManagement.Core/ProjectManagement.Core.csproj" />
+  <Project Path="ProjectManagement.Core/ProjectManagement.Domain.csproj" />
   <Project Path="ProjectManagement.Infrastructure/ProjectManagement.Infrastructure.csproj" />
 </Solution>

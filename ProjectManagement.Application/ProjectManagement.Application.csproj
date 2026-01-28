@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\ProjectManagement.Core\ProjectManagement.Core.csproj" />
+    <ProjectReference Include="..\ProjectManagement.Core\ProjectManagement.Domain.csproj" />
     <ProjectReference Include="..\ProjectManagement.Infrastructure\ProjectManagement.Infrastructure.csproj" />
   </ItemGroup>
 
