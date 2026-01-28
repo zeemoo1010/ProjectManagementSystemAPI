@@ -1,13 +1,11 @@
-﻿using ProjectManagement.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectManagement.Core.Entities;
 
 namespace ProjectManagement.Persistence.Context
 {
-    public class ApplicationDbContext
+    public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContext<ApplicationDbContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
@@ -17,4 +15,5 @@ namespace ProjectManagement.Persistence.Context
         public DbSet<TaskItem> TaskItems { get; set; }
         public DbSet<User> Users { get; set; }
     }
+
 }
