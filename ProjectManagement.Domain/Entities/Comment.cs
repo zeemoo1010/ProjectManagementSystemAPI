@@ -1,7 +1,7 @@
-using System;
-using ProjectManagement.Core.Entities;
+﻿using System;
+using ProjectManagement.Domain.Entities;
 
-namespace ProjectManagement.Core.Entities
+namespace ProjectManagement.Domain.Entities
 {
     public class Comment
     {

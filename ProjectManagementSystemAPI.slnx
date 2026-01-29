@@ -1,7 +1,7 @@
 <Solution>
-  <Project Path="Persistence/ProjectManagement.Persistence.csproj" Id="ba68cadc-5ece-42b0-9994-42718881085b" />
   <Project Path="ProjectManagement.API/ProjectManagement.API.csproj" />
   <Project Path="ProjectManagement.Application/ProjectManagement.Application.csproj" />
-  <Project Path="ProjectManagement.Core/ProjectManagement.Domain.csproj" />
+  <Project Path="ProjectManagement.Domain/ProjectManagement.Domain.csproj" Id="a8d11f4b-42f1-4bc3-881a-366ef82be521" />
   <Project Path="ProjectManagement.Infrastructure/ProjectManagement.Infrastructure.csproj" />
+  <Project Path="ProjectManagement.Persistence/ProjectManagement.Persistence.csproj" Id="ceac01b7-be59-4f3d-b1e0-01aa9e6de1e6" />
 </Solution>

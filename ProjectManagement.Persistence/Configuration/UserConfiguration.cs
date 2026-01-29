@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ProjectManagement.Core.Entities;
+using ProjectManagement.Domain.Entities;
 
 
 namespace ProjectManagement.Persistence.Configuration

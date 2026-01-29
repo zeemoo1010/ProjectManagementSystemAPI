@@ -1,5 +1,5 @@
-﻿using ProjectManagement.Core.Entities;
-using TaskStatus = ProjectManagement.Core.Entities.TaskStatus;
+﻿using ProjectManagement.Domain.Entities;
+using TaskStatus = ProjectManagement.Domain.Entities.TaskStatus;
 
 namespace ProjectManagement.Application.Dto
 {

@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace ProjectManagement.Core.Entities
+namespace ProjectManagement.Domain.Entities
 {
-     public enum TaskStatus
+    public enum TaskStatus
     {
         Pending = 0,
         InProgress,

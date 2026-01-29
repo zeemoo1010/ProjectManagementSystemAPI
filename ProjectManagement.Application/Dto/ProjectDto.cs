@@ -1,4 +1,4 @@
-﻿using ProjectManagement.Core.Entities;
+﻿using ProjectManagement.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;

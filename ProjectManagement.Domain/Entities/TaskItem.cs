@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace ProjectManagement.Core.Entities
+namespace ProjectManagement.Domain.Entities
 {
     public class TaskItem
     {
