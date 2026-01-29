@@ -1,11 +1,12 @@
 ﻿using ProjectManagement.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace ProjectManagement.Application.Dto
 {
-    public class UserDto
+    public class CreateUserDto
     {
-        public Guid Id { get; set; }
-
         public string FullName { get; set; }
 
         public string Email { get; set; }
