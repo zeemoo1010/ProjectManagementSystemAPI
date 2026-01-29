@@ -1,30 +1,25 @@
 ﻿using ProjectManagement.Domain.Entities;
-using TaskStatus = ProjectManagement.Domain.Entities.TaskStatus;
 
 namespace ProjectManagement.Application.Dto
 {
     public class TaskItemDto
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; }
 
         public string Title { get; set; }
 
         public string Description { get; set; }
 
-        public TaskPriority Priority { get; set; } = TaskPriority.Medium;
+        public TaskPriority Priority { get; set; }
 
-        public TaskStatus Status { get; set; } = TaskStatus.Pending;
+        public TaskStatus Status { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; }
 
         public DateTime? DueDate { get; set; }
 
         public Guid ProjectId { get; set; }
+
         public Guid? AssignedUserId { get; set; }
-
-        public Project Project { get; set; }
-        public User? AssignedUser { get; set; }
-
-        public HashSet<Comment>? Comments { get; set; } = new HashSet<Comment>();
     }
 }

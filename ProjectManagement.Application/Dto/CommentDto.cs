@@ -14,9 +14,11 @@ namespace ProjectManagement.Application.Dto
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public Guid TaskItemId { get; set; }
+
         public Guid UserId { get; set; }
 
         public TaskItem TaskItem { get; set; }
+
         public User User { get; set; }
     }
 }
