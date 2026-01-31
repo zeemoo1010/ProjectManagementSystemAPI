@@ -7,16 +7,16 @@ namespace ProjectManagement.Infrastructure.Repository
 {
     public class CommentRepository(ApplicationDbContext _dbContext) : ICommentRepository
     {
-        public async Task<bool> CommentExistsAsync(Guid commentId, CancellationToken cancellationToken = default)
+        public async Task<bool> CommentExistsAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Comments.AnyAsync(c => c.Id == commentId, cancellationToken);
+            return await _dbContext.Comments.AnyAsync(c => c.Id == id, cancellationToken);
         }
 
-        public async Task<Guid> CreateCommentAsync(Comment comment, CancellationToken cancellationToken = default)
+        public async Task<Comment> CreateCommentAsync(Comment comment, CancellationToken cancellationToken = default)
         {
             await _dbContext.Comments.AddAsync(comment, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
-            return comment.Id;
+            return comment;
         }
 
         public async Task<bool> DeleteCommentAsync(Guid commentId, CancellationToken cancellationToken = default)

@@ -1,4 +1,6 @@
 ﻿using ProjectManagement.Domain.Entities;
+using DomainTaskStatus = ProjectManagement.Domain.Entities.TaskStatus;
+
 
 namespace ProjectManagement.Application.Dto
 {
@@ -10,7 +12,7 @@ namespace ProjectManagement.Application.Dto
 
         public TaskPriority Priority { get; set; }
 
-        //public TaskStatus Status { get; set; }
+        public DomainTaskStatus Status { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

@@ -10,11 +10,11 @@ namespace ProjectManagement.Infrastructure.Repository
 {
     public class TaskItemRepository(ApplicationDbContext _dbContext) : ITaskItemRepository
     {
-        public async Task<Guid> CreateTaskItemAsync(TaskItem taskItem, CancellationToken cancellationToken = default)
+        public async Task<TaskItem> CreateTaskItemAsync(TaskItem taskItem, CancellationToken cancellationToken = default)
         {
             await _dbContext.TaskItems.AddAsync(taskItem, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
-            return taskItem.Id;
+            return taskItem;
         }
 
         public async Task<bool> DeleteTaskItemAsync(Guid taskItemId, CancellationToken cancellationToken = default)
@@ -37,9 +37,9 @@ namespace ProjectManagement.Infrastructure.Repository
             return await _dbContext.TaskItems.FirstOrDefaultAsync(t => t.Id == taskItemId, cancellationToken);
         }
 
-        public async Task<bool> TaskItemExistsAsync(Guid taskItemId, CancellationToken cancellationToken = default)
+        public async Task<bool> TaskItemExistsAsync(string title, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.TaskItems.AnyAsync(t => t.Id == taskItemId, cancellationToken);
+            return await _dbContext.TaskItems.AnyAsync(t => t.Title == title, cancellationToken);
         }
 
         public async Task UpdateTaskItemAsync(TaskItem taskItem, CancellationToken cancellationToken = default)
