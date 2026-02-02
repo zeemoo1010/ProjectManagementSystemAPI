@@ -5,6 +5,8 @@ using ProjectManagement.Domain.Interfaces;
 
 namespace ProjectManagement.Application.Services
 {
+
+    //https://meet.google.com/rny-xnzw-cjq
     public class ProjectService(IProjectRepository _projectRepository) : IProjectService
     {
         public async Task<BaseResponse<ProjectDto>> CreateProjectAsync(CreateProjectDto request, CancellationToken cancellationToken = default)
@@ -14,7 +16,8 @@ namespace ProjectManagement.Application.Services
                 return BaseResponse<ProjectDto>.FailureResponse("Project data cannot be null.");
             }
             var existingProject = await _projectRepository.ProjectExistsAsync(request.ProjectName, cancellationToken);
-            if(existingProject)
+
+            if (existingProject)
             {
                 return BaseResponse<ProjectDto>.FailureResponse("A project with the same name already exists.");
             }
@@ -102,13 +105,7 @@ namespace ProjectManagement.Application.Services
             return BaseResponse<ProjectDto>.SuccessResponse(projectDto);
         }
 
-        public async Task<BaseResponse<bool>> ProjectExistsAsync(string projectName, CancellationToken cancellationToken = default)
-        {
-            var projectExists = await _projectRepository.ProjectExistsAsync(projectName, cancellationToken);
-            return BaseResponse<bool>.SuccessResponse(projectExists);
-        }
-
-        public async Task<BaseResponse<bool>> UpdateProjectAsync(Guid projectId, CreateProjectDto projectDto, CancellationToken cancellationToken = default)
+        public async Task<BaseResponse<bool>> UpdateProjectAsync(Guid projectId, ProjectDto projectDto, CancellationToken cancellationToken = default)
         {var existingProject = await _projectRepository.GetProjectByIdAsync(projectId, cancellationToken);
             if (existingProject == null)
             {

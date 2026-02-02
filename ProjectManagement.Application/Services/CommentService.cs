@@ -7,11 +7,6 @@ namespace ProjectManagement.Application.Services
 {
     public class CommentService(ICommentRepository _commentRepository) : ICommentService
     {
-        public async Task<BaseResponse<bool>> CommentExistsAsync(Guid commentId, CancellationToken cancellationToken = default)
-        {
-            var exists = await _commentRepository.CommentExistsAsync(commentId, cancellationToken);
-            return BaseResponse<bool>.SuccessResponse(exists);
-        }
 
         public async Task<BaseResponse<Guid>> CreateCommentAsync(CreateCommentDto request, CancellationToken cancellationToken = default)
         {

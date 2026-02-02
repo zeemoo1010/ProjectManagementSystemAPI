@@ -36,29 +36,74 @@ namespace ProjectManagement.Application.Services
 
         }
 
-        public Task<BaseResponse<bool>> DeleteTaskItemAsync(Guid taskItemId, CancellationToken cancellationToken = default)
+        public async Task<BaseResponse<bool>> DeleteTaskItemAsync(Guid taskItemId, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var existingTaskItem = await _taskItemRepository.GetTaskItemByIdAsync(taskItemId, cancellationToken);
+            if (existingTaskItem == null)
+            {
+                return BaseResponse<bool>.FailureResponse("Task item not found.");
+            }
+            await _taskItemRepository.DeleteTaskItemAsync(taskItemId, cancellationToken);
+            return BaseResponse<bool>.SuccessResponse(true, "Task item deleted successfully.");
         }
 
-        public Task<BaseResponse<List<TaskItemDto>>> GetAllTaskItemsAsync(CancellationToken cancellationToken = default)
+        public async Task<BaseResponse<List<TaskItemDto>>> GetAllTaskItemsAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var taskItems = await _taskItemRepository.GetAllTaskItemsAsync(cancellationToken);
+            var taskItemDtos = taskItems.Select(ti => new TaskItemDto
+            {
+                Id = ti.Id,
+                Title = ti.Title,
+                Description = ti.Description,
+                Priority = ti.Priority,
+                Status = ti.Status,
+                CreatedAt = ti.CreatedAt,
+                DueDate = ti.DueDate,
+                ProjectId = ti.ProjectId,
+                AssignedUserId = ti.AssignedUserId
+            }).ToList();
+            return BaseResponse<List<TaskItemDto>>.SuccessResponse(taskItemDtos, "Task items retrieved successfully.");
         }
 
-        public Task<BaseResponse<TaskItemDto>> GetTaskItemByIdAsync(Guid taskItemId, CancellationToken cancellationToken = default)
+        public async Task<BaseResponse<TaskItemDto>> GetTaskItemByIdAsync(Guid taskItemId, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var taskItem = await _taskItemRepository.GetTaskItemByIdAsync(taskItemId, cancellationToken);
+            if (taskItem == null)
+            {
+                return BaseResponse<TaskItemDto>.FailureResponse("Task item not found.");
+            }
+            var taskItemDto = new TaskItemDto
+            {
+                Id = taskItem.Id,
+                Title = taskItem.Title,
+                Description = taskItem.Description,
+                Priority = taskItem.Priority,
+                Status = taskItem.Status,
+                CreatedAt = taskItem.CreatedAt,
+                DueDate = taskItem.DueDate,
+                ProjectId = taskItem.ProjectId,
+                AssignedUserId = taskItem.AssignedUserId
+             };
+            return BaseResponse<TaskItemDto>.SuccessResponse(taskItemDto, "Task item retrieved successfully.");
         }
 
-        public Task<BaseResponse<bool>> TaskItemExistsAsync(string title, CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<BaseResponse<bool>> UpdateTaskItemAsync(Guid taskItemId, CreateTaskItemDto taskItemDto, CancellationToken cancellationToken = default)
+        public async Task<BaseResponse<bool>> UpdateTaskItemAsync(Guid taskItemId, CreateTaskItemDto taskItemDto, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var existingTaskItem = await _taskItemRepository.GetTaskItemByIdAsync(taskItemId, cancellationToken);
+            if (existingTaskItem == null)
+            {
+                return BaseResponse<bool>.FailureResponse("Task item not found.");
+            }
+            existingTaskItem.Title = taskItemDto.Title;
+            existingTaskItem.Description = taskItemDto.Description;
+            existingTaskItem.Priority = taskItemDto.Priority;
+            existingTaskItem.Status = taskItemDto.Status;
+            existingTaskItem.DueDate = taskItemDto.DueDate;
+            existingTaskItem.ProjectId = taskItemDto.ProjectId;
+            existingTaskItem.AssignedUserId = taskItemDto.AssignedUserId;
+            await _taskItemRepository.UpdateTaskItemAsync(existingTaskItem, cancellationToken);
+            return BaseResponse<bool>.SuccessResponse(true, "Task item updated successfully.");
         }
     }
 }

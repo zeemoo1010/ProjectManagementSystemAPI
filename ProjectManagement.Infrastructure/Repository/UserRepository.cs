@@ -10,11 +10,11 @@ namespace ProjectManagement.Infrastructure.Repository
 {
     public class UserRepository(ApplicationDbContext _dbContext) : IUserRepository
     {
-        public async Task<Guid> CreateUserAsync(User user, CancellationToken cancellationToken = default)
+        public async Task<User> CreateUserAsync(User user, CancellationToken cancellationToken = default)
         {
             await _dbContext.Users.AddAsync(user, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
-            return user.Id;
+            return user;
         }
 
         public async Task<bool> DeleteUserAsync(Guid userId, CancellationToken cancellationToken = default)
@@ -42,9 +42,9 @@ namespace ProjectManagement.Infrastructure.Repository
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<bool> UserExistsAsync(Guid userId, CancellationToken cancellationToken = default)
+        public async Task<bool> UserExistByEmailAsync(string email, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Users.AnyAsync(u => u.Id == userId, cancellationToken);
+            return await _dbContext.Users.AnyAsync(u => u.Email  == email, cancellationToken);
         }
     }
 }

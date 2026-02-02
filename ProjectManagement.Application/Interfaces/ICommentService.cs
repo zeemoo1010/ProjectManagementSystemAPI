@@ -10,7 +10,6 @@ namespace ProjectManagement.Application.Interfaces
         Task<BaseResponse<Guid>> CreateCommentAsync(CreateCommentDto request, CancellationToken cancellationToken = default);
         Task<BaseResponse<CommentDto>> GetCommentByIdAsync(Guid commentId, CancellationToken cancellationToken = default);
         Task<BaseResponse<List<CommentDto>>> GetAllCommentsAsync(CancellationToken cancellationToken = default);
-        Task<BaseResponse<bool>> CommentExistsAsync(Guid commentId, CancellationToken cancellationToken = default);
         Task<BaseResponse<bool>> UpdateCommentAsync(Guid commentId, CreateCommentDto commentDto, CancellationToken cancellationToken = default);
         Task<BaseResponse<bool>> DeleteCommentAsync(Guid commentId, CancellationToken cancellationToken = default);
     }

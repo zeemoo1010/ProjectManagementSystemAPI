@@ -7,11 +7,11 @@ namespace ProjectManagement.Infrastructure.Repository
 {
     public class ProjectRepository(ApplicationDbContext _dbContext) : IProjectRepository
     {
-        public async Task<Guid> CreateProjectAsync(Project project, CancellationToken cancellationToken = default)
+        public async Task<Project> CreateProjectAsync(Project project, CancellationToken cancellationToken = default)
         {
             await _dbContext.Projects.AddAsync(project, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
-            return project.Id;
+            return project;
         }
 
         public async Task<bool> DeleteProjectAsync(Guid projectId, CancellationToken cancellationToken = default)
@@ -34,9 +34,9 @@ namespace ProjectManagement.Infrastructure.Repository
             return await _dbContext.Projects.FirstOrDefaultAsync(p => p.Id == projectId, cancellationToken);
         }
 
-        public async Task<bool> ProjectExistsAsync(Guid projectId, CancellationToken cancellationToken = default)
+        public async Task<bool> ProjectExistsAsync(string projectName, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Projects.AnyAsync(p => p.Id == projectId, cancellationToken);
+            return await _dbContext.Projects.AnyAsync(p => p.ProjectName == projectName, cancellationToken);
         }
 
         public async Task UpdateProjectAsync(Project project, CancellationToken cancellationToken = default)
