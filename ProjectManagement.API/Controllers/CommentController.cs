@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Application.Dto;
 using ProjectManagement.Application.Interfaces;
+using ProjectManagement.Application.Services;
 
 namespace ProjectManagement.API.Controllers
 {
@@ -28,6 +29,59 @@ namespace ProjectManagement.API.Controllers
             return Ok(result);
         }
 
+        //[HttpGet("get-comments/{taskId}")]
+        //public async Task<IActionResult> GetComments(Guid taskId, CancellationToken cancellationToken)
+        //{
+        //    var result = await _commentService.GetCommentsByTaskIdAsync(taskId, cancellationToken);
+        //    if (!result.Success)
+        //    {
+        //        _logger.LogWarning("GetComments failed: {Message}", result.Message);
+        //        return BadRequest(result.Message);
+        //    }
+        //    return Ok(result);
+        //}
+
+        [HttpGet("get-comment-by-id")]
+        public async Task<IActionResult> GetCommentById(Guid commentId, CancellationToken cancellationToken)
+        {
+            var result = await _commentService.GetCommentByIdAsync(commentId, cancellationToken);
+            if (!result.Success)
+            {
+                _logger.LogWarning("GetCommentById failed: {Message}", result.Message);
+                return BadRequest(result.Message);
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("get-all-comments")]
+        public async Task<IActionResult> GetAllComments(CancellationToken cancellationToken)
+        {
+            var result = await _commentService.GetAllCommentsAsync(cancellationToken);
+            if (!result.Success)
+            {
+                _logger.LogWarning("GetAllComment failed: {Message}", result.Message);
+                return BadRequest(result.Message);
+            }
+            return Ok(result);
+        }
+
+        [HttpPut("update-comment/{commentId}")]
+        public async Task<IActionResult> UpdateComent(Guid id, [FromBody] CreateCommentDto _commentDto, CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogWarning("UpdateComment: Invalid request model");
+                return BadRequest(ModelState);
+            }
+            var result = await _commentService.UpdateCommentAsync(id, _commentDto, cancellationToken);
+            if (!result.Success)
+            {
+                _logger.LogWarning("UpdateComment failed: {Message}", result.Message);
+                return BadRequest(result.Message);
+            }
+            return Ok(result);
+        }
+
 
         [HttpDelete("delete-comment/{commentId}")]
         public async Task<IActionResult> DeleteComment(Guid commentId, CancellationToken cancellationToken)
@@ -40,18 +94,5 @@ namespace ProjectManagement.API.Controllers
             }
             return Ok(result);
         }
-
-
-        //[HttpGet("get-comments-by-task/{taskId}")]
-        //public async Task<IActionResult> GetCommentsByTask(Guid taskId, CancellationToken cancellationToken)
-        //{
-        //    var result = await _commentService.GetCommentsByTaskAsync(taskId, cancellationToken);
-        //    if (!result.Success)
-        //    {
-        //        _logger.LogWarning("GetCommentsByTask failed: {Message}", result.Message);
-        //        return BadRequest(result.Message);
-        //    }
-        //    return Ok(result);
-        //}
     }
 }

@@ -46,5 +46,10 @@ namespace ProjectManagement.Infrastructure.Repository
         {
             return await _dbContext.Users.AnyAsync(u => u.Email  == email, cancellationToken);
         }
+
+        public async Task<bool> UserExistsByIdAsync(Guid userId, CancellationToken cancellationToken = default)
+        {
+            return await _dbContext.Users.AnyAsync(u => u.Id == userId, cancellationToken);
+        }
     }
 }

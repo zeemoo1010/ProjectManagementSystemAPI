@@ -2,25 +2,37 @@
 using ProjectManagement.Application.Interfaces;
 using ProjectManagement.Domain.Entities;
 using ProjectManagement.Domain.Interfaces;
+using ProjectManagement.Infrastructure.Repository;
 
 namespace ProjectManagement.Application.Services
 {
 
     //https://meet.google.com/rny-xnzw-cjq
-    public class ProjectService(IProjectRepository _projectRepository) : IProjectService
+    public class ProjectService(IProjectRepository _projectRepository, IUserRepository _userRepository) : IProjectService
     {
-        public async Task<BaseResponse<ProjectDto>> CreateProjectAsync(CreateProjectDto request, CancellationToken cancellationToken = default)
+        public async Task<BaseResponse<ProjectDto>> CreateProjectAsync(CreateProjectDto request,CancellationToken cancellationToken = default)
         {
-            if(request == null)
+            if (request == null)
             {
                 return BaseResponse<ProjectDto>.FailureResponse("Project data cannot be null.");
             }
+
             var existingProject = await _projectRepository.ProjectExistsAsync(request.ProjectName, cancellationToken);
 
             if (existingProject)
             {
                 return BaseResponse<ProjectDto>.FailureResponse("A project with the same name already exists.");
             }
+
+            // ✅ VALIDATE MANAGER BEFORE SAVING
+            var managerExists = await _userRepository.UserExistsByIdAsync(request.ManagerId,cancellationToken);
+
+            if (!managerExists)
+            {
+                return BaseResponse<ProjectDto>.FailureResponse("Selected manager does not exist.");
+            }
+
+            // ✅ CREATE ENTITY
             var project = new Project
             {
                 Id = Guid.NewGuid(),
@@ -30,13 +42,14 @@ namespace ProjectManagement.Application.Services
                 EndDate = request.EndDate,
                 Status = request.Status,
                 ManagerId = request.ManagerId,
-                CreatedAt = request.CreatedAt,
+                CreatedAt = DateTime.UtcNow,
                 CreatedBy = request.CreatedBy
             };
 
-
+            // ✅ SAVE
             var createdProject = await _projectRepository.CreateProjectAsync(project, cancellationToken);
 
+            // ✅ MAP DTO
             var projectDto = new ProjectDto
             {
                 Id = createdProject.Id,
@@ -50,9 +63,9 @@ namespace ProjectManagement.Application.Services
                 CreatedBy = createdProject.CreatedBy
             };
 
-            return BaseResponse<ProjectDto>.SuccessResponse(projectDto, "Project created successfully.");
-
+            return BaseResponse<ProjectDto>.SuccessResponse(projectDto,"Project created successfully.");
         }
+
 
         public async Task<BaseResponse<bool>> DeleteProjectAsync(Guid projectId, CancellationToken cancellationToken = default)
         {

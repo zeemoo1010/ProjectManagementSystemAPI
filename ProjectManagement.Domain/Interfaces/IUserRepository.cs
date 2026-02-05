@@ -10,5 +10,6 @@ namespace ProjectManagement.Domain.Interfaces
         Task UpdateUserAsync(User user, CancellationToken cancellationToken = default);
         Task<bool> DeleteUserAsync(Guid userId, CancellationToken cancellationToken = default);
         Task<bool> UserExistByEmailAsync(string email, CancellationToken cancellationToken = default);
+        Task<bool> UserExistsByIdAsync(Guid userId, CancellationToken cancellationToken = default);
     }
 }
