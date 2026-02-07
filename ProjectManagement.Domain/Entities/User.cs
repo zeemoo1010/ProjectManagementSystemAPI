@@ -5,10 +5,10 @@ namespace ProjectManagement.Domain.Entities
 {
     public class User
     {
-        public Guid Id { get; set; } = Guid.NewGuid(); // Unique identifier
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string FullName { get; set; }
         public string Email { get; set; }
-        public UserRole Role { get; set; } // Enum instead of string
+        public UserRole Role { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
         // Relationships

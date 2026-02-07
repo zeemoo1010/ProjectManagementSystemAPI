@@ -6,7 +6,7 @@ namespace ProjectManagement.Domain.Entities
     public class Project
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public Guid ManagerId { get; set; } // Foreign Key
+        public Guid ManagerId { get; set; }
         public User Manager { get; set; }
         public string ProjectName { get; set; }
         public string Description { get; set; }
