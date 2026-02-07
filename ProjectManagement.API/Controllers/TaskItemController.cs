@@ -25,18 +25,6 @@ namespace ProjectManagement.API.Controllers
             return Ok(result);
         }
 
-        //[HttpGet("get-tasks-by-project-id")]
-        //public async Task<IActionResult> GetTaskItemByProjectId(Guid projectId, CancellationToken cancellationToken)
-        //{
-        //    var result = await _taskItemService.GetTaskItemByProjectIdAsync(projectId, cancellationToken);
-        //    if (!result.Success)
-        //    {
-        //        _logger.LogWarning("GetTasksByProjectId failed: {Message}", result.Message);
-        //        return BadRequest(result.Message);
-        //    }
-        //    return Ok(result);
-        //}
-
         [HttpGet("get-task-by-id")]
         public async Task<IActionResult> GetTaskItemById(Guid id, CancellationToken cancellationToken)
         {
@@ -48,18 +36,6 @@ namespace ProjectManagement.API.Controllers
             }
             return Ok(result);
         }
-
-        //[HttpGet("get-tasks-by-user-id")]
-        //public async Task<IActionResult> GetTTaskItemByUserId(Guid userId, CancellationToken cancellationToken)
-        //{
-        //    var result = await _taskItemService.GetTaskItemByUserIdAsync(userId, cancellationToken);
-        //    if (!result.Success)
-        //    {
-        //        _logger.LogWarning("GetTasksByUserId failed: {Message}", result.Message);
-        //        return BadRequest(result.Message);
-        //    }
-        //    return Ok(result);
-        //}
 
         [HttpGet("get-all-tasks")]
         public async Task<IActionResult> GetAllTaskItems(CancellationToken cancellationToken)
