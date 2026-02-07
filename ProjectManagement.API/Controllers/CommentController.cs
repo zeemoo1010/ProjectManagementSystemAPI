@@ -29,18 +29,6 @@ namespace ProjectManagement.API.Controllers
             return Ok(result);
         }
 
-        //[HttpGet("get-comments/{taskId}")]
-        //public async Task<IActionResult> GetComments(Guid taskId, CancellationToken cancellationToken)
-        //{
-        //    var result = await _commentService.GetCommentsByTaskIdAsync(taskId, cancellationToken);
-        //    if (!result.Success)
-        //    {
-        //        _logger.LogWarning("GetComments failed: {Message}", result.Message); 
-        //        return BadRequest(result.Message);
-        //    }
-        //    return Ok(result);
-        //}
-
         [HttpGet("get-comment-by-id")]
         public async Task<IActionResult> GetCommentById(Guid commentId, CancellationToken cancellationToken)
         {
