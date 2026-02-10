@@ -1,7 +1,4 @@
-﻿using System;
-using ProjectManagement.Domain.Entities;
-
-namespace ProjectManagement.Domain.Entities
+﻿namespace ProjectManagement.Domain.Entities
 {
     public class Comment
     {

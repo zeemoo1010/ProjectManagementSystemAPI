@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ProjectManagement.Domain.Entities
+﻿namespace ProjectManagement.Domain.Entities
 {
     public enum UserRole
     {

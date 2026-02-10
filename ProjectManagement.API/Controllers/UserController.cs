@@ -6,21 +6,19 @@ namespace ProjectManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController(IUserService _userService, ILogger<UserController> _logger) : ControllerBase
+    public class UserController(IUserService _userService) : ControllerBase
     {
         [HttpPost("creat-user")]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserDto _userDto, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
-                _logger.LogWarning("CreateUser: Invalide request model");
                 return BadRequest(ModelState);
             }
             var result = await _userService.CreateUserAsync(_userDto, cancellationToken);
 
             if (!result.Success)
             {
-                _logger.LogWarning("CreateUser failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
 
@@ -36,7 +34,6 @@ namespace ProjectManagement.API.Controllers
 
             if (!result.Success)
             {
-                _logger.LogWarning("GetUser failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
 
@@ -50,7 +47,6 @@ namespace ProjectManagement.API.Controllers
             var result = await _userService.GetAllUsersAsync(cancellationToken);
             if (!result.Success)
             {
-                _logger.LogWarning("GetAllUser failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
             return Ok(result);
@@ -62,13 +58,11 @@ namespace ProjectManagement.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                _logger.LogWarning("UpdateUser: Invalide request model");
                 return BadRequest(ModelState);
             }
             var result = await _userService.UpdateUserAsync(id, _userDto, cancellationToken);
             if (!result.Success)
             {
-                _logger.LogWarning("UpdateUser failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
             return Ok(result);
@@ -81,7 +75,6 @@ namespace ProjectManagement.API.Controllers
             var result = await _userService.DeleteUserAsync(id, cancellation);
             if (!result.Success)
             {
-                _logger.LogWarning("DeleteUser failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
             return Ok(result);

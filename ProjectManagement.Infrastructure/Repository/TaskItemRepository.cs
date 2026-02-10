@@ -2,9 +2,6 @@
 using ProjectManagement.Domain.Entities;
 using ProjectManagement.Domain.Interfaces;
 using ProjectManagement.Persistence.Context;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ProjectManagement.Infrastructure.Repository
 {

@@ -1,20 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Application.Dto;
 using ProjectManagement.Application.Interfaces;
-using ProjectManagement.Application.Services;
 
 namespace ProjectManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommentController(ICommentService _commentService, ILogger<CommentController> _logger) : ControllerBase
+    public class CommentController(ICommentService _commentService) : ControllerBase
     {
         [HttpPost("create-comment")]
         public async Task<IActionResult> CreateComment([FromBody] CreateCommentDto request, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
-                _logger.LogWarning("CreateComment: Invalid request model");
                 return BadRequest(ModelState);
             }
 
@@ -22,7 +20,6 @@ namespace ProjectManagement.API.Controllers
 
             if (!result.Success)
             {
-                _logger.LogWarning("CreateComment failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
 
@@ -35,7 +32,6 @@ namespace ProjectManagement.API.Controllers
             var result = await _commentService.GetCommentByIdAsync(commentId, cancellationToken);
             if (!result.Success)
             {
-                _logger.LogWarning("GetCommentById failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
             return Ok(result);
@@ -47,7 +43,6 @@ namespace ProjectManagement.API.Controllers
             var result = await _commentService.GetAllCommentsAsync(cancellationToken);
             if (!result.Success)
             {
-                _logger.LogWarning("GetAllComment failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
             return Ok(result);
@@ -58,13 +53,11 @@ namespace ProjectManagement.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                _logger.LogWarning("UpdateComment: Invalid request model");
                 return BadRequest(ModelState);
             }
             var result = await _commentService.UpdateCommentAsync(id, _commentDto, cancellationToken);
             if (!result.Success)
             {
-                _logger.LogWarning("UpdateComment failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
             return Ok(result);
@@ -77,7 +70,6 @@ namespace ProjectManagement.API.Controllers
             var result = await _commentService.DeleteCommentAsync(commentId, cancellationToken);
             if (!result.Success)
             {
-                _logger.LogWarning("DeleteComment failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
             return Ok(result);

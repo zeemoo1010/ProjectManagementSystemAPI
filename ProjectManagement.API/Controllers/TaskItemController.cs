@@ -6,20 +6,18 @@ namespace ProjectManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TaskItemController(ITaskItemService _taskItemService, ILogger<TaskItemController> _logger) : ControllerBase
+    public class TaskItemController(ITaskItemService _taskItemService) : ControllerBase
     {
         [HttpPost("create-task")]
         public async Task<IActionResult> CreateTask([FromBody] CreateTaskItemDto taskItemDto, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
-                _logger.LogWarning("CreateTask: Invalid request model");
                 return BadRequest(ModelState);
             }
             var result = await _taskItemService.CreateTaskItemAsync(taskItemDto, cancellationToken);
             if (!result.Success)
             {
-                _logger.LogWarning("CreateTask failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
             return Ok(result);
@@ -31,7 +29,6 @@ namespace ProjectManagement.API.Controllers
             var result = await _taskItemService.GetTaskItemByIdAsync(id, cancellationToken);
             if (!result.Success)
             {
-                _logger.LogWarning("GetTaskById failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
             return Ok(result);
@@ -43,7 +40,6 @@ namespace ProjectManagement.API.Controllers
             var result = await _taskItemService.GetAllTaskItemsAsync(cancellationToken);
             if (!result.Success)
             {
-                _logger.LogWarning("GetAllTasks failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
             return Ok(result);
@@ -55,13 +51,11 @@ namespace ProjectManagement.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                _logger.LogWarning("UpdateTask: Invalid request model");
                 return BadRequest(ModelState);
             }
             var result = await _taskItemService.UpdateTaskItemAsync(id, _taskItemDto, cancellationToken);
             if (!result.Success)
             {
-                _logger.LogWarning("UpdateTask failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
             return Ok(result);
@@ -73,7 +67,6 @@ namespace ProjectManagement.API.Controllers
             var result = await _taskItemService.DeleteTaskItemAsync(id, cancellationToken);
             if (!result.Success)
             {
-                _logger.LogWarning("DeleteTask failed: {Message}", result.Message);
                 return BadRequest(result.Message);
             }
             return Ok(result);

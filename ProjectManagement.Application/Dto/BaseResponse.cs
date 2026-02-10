@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ProjectManagement.Application.Dto;
+﻿namespace ProjectManagement.Application.Dto;
 
 public class BaseResponse<T>
 {
