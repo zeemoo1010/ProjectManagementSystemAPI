@@ -1,39 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Application.Dto;
 using ProjectManagement.Application.Interfaces;
-using ProjectManagement.Domain.Entities;
 
 namespace ProjectManagement.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AuthController : ControllerBase
+    public class AuthController(IJwtService _jwtService) : ControllerBase
     {
-        private readonly IJwtService _jwtService;
-
-        public AuthController(IJwtService jwtService)
-        {
-            _jwtService = jwtService;
-        }
-
         [HttpPost("generate-token")]
         public IActionResult GenerateToken([FromBody] GenerateTokenRequest request)
         {
-            if (!Enum.TryParse<UserRole>(request.Role, true, out var parsedRole))
+            try
             {
-                return BadRequest("Invalid role");
+                var token = _jwtService.GenerateToken(request);
+                return Ok(new { Token = token });
             }
-
-            var user = new User
+            catch (ArgumentException ex)
             {
-                Id = Guid.NewGuid(),
-                Email = request.Email,
-                Role = parsedRole
-            };
-
-            var token = _jwtService.GenerateToken(user);
-
-            return Ok(new { Token = token });
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

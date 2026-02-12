@@ -1,9 +1,9 @@
-﻿using ProjectManagement.Domain.Entities;
+﻿using ProjectManagement.Application.Dto;
 
 namespace ProjectManagement.Application.Interfaces
 {
     public interface IJwtService
     {
-        string GenerateToken(User user);
+        string GenerateToken(GenerateTokenRequest request);
     }
 }

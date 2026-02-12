@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Application.Dto;
 using ProjectManagement.Application.Interfaces;
 
@@ -6,6 +7,7 @@ namespace ProjectManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController(IUserService _userService) : ControllerBase
     {
         [HttpPost("creat-user")]
